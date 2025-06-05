@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/imagens/1_favicon.png">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../../assets/estilos/fotos.css">
+    <title>Azul 91 - Fotos</title>
+
+    <!-- Ícones Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Preloader Início -->
+    <div class="preloader" id="preloader">
+        <div class="star"></div>
+        <div class="phrase" id="phrase"></div>
+    </div>
+    <!-- Preloader Fim -->
+
+    <!-- Início do Header -->
+    <header>
+        <!-- Logotipo Principal -->
+        <div class="logo-principal">
+            <img src="../imagens/2_logoPrimario.gif" alt="1º Logotipo da Turma">
+        </div>
+
+        <!-- Menu de Navegação -->
+        <nav>
+            <ul class="menu-navegacao">
+                <li><a href="../../index.html"><i class="fa-solid fa-home"></i><span>Home</span></a></li>
+                <li><a href="../../assets/html/sobre.html"><i class="fa-solid fa-users"></i><span>Sobre</span></a></li>
+                <li><a href="../../assets/html/videos.html"><i class="fa-solid fa-video"></i><span>Vídeos</span></a>
+                </li>
+                <li><a href="../../assets/html/tarjetas.html"><i
+                            class="fa-solid fa-id-badge"></i><span>Tarjetas</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Ícone Bars -->
+        <div class="menu-dropdown">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../assets/html/sobre.html">Sobre</a></li>
+                <li><a href="../../assets/html/videos.html">Vídeos</a></li>
+                <li><a href="../../assets/html/tarjetas.html">Tarjetas</a></li>
+            </ul>
+
+            <!-- Botão dentro do Dropdown Menu -->
+            <button class="dropdown-action-btn botao-adicionar" aria-label="Botão para Adicionar Foto">Adicionar
+                Foto</button>
+        </div>
+
+        <!-- Botao -->
+        <div id="btnAdicionarFoto" class="botao-header">
+            <button class="botao-adicionar" aria-label="Botão para Adicionar Foto">Adicionar Foto</button>
+        </div>
+
+        <!-- Logotipo Secundário -->
+        <div class="logo-secundario">
+            <img src="../imagens/4_logoSecundario.png" alt="2º Logotipo da Turma">
+        </div>
+    </header>
+    <!-- Fim do Header -->
+
+    <!-- Cabeçalho Início -->
+    <div class="galeria-heading">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+    </div>
+    <!-- cabeçalho Fim -->
+
+    <!-- Popup Adicionar Foto Início -->
+    <div id="popupUpload" class="popup">
+        <div class="popup-content">
+            <h2 class="popup-title">Adicionar Foto</h2>
+            <img src="../../assets/imagens/6_imgFoto.png" alt="Alunos Formando o Nome da Turma" class="popup-icon">
+            <span class="close-btn" onclick="closePopup()" aria-label="Fechar Formulário Adicionar Foto">&times;</span>
+
+            <!-- Formulário de Upload -->
+            <form id="uploadForm" action="#" method="post" enctype="multipart/form-data">
+                <!-- Campos do Formulário -->
+                <label for="milhao">Milhão:</label>
+                <div class="milhao-input-wrapper">
+                    <span class="milhao-prefixo">91-</span>
+                    <input type="text" id="milhao" maxlength="4" pattern="\d{4}" name="milhao" class="milhao-input"
+                        placeholder="" required>
+                </div>
+
+                <label for="nomeGuerra">Nome de Guerra:</label>
+                <input type="text" id="nomeGuerra" name="nomeGuerra" required maxlength="50"
+                    placeholder="Digite seu Nome de Guerra" />
+
+                <label for="esquadrilha">Esquadrilha:</label>
+                <select id="esquadrilha" name="esquadrilha" required>
+                    <option value="" disabled selected>Selecione a Esquadrilha</option>
+                    <option value="7ª Esquadrilha">7ª Esquadrilha</option>
+                    <option value="8ª Esquadrilha">8ª Esquadrilha</option>
+                    <option value="9ª Esquadrilha">9ª Esquadrilha</option>
+                    <option value="10ª Esquadrilha">10ª Esquadrilha</option>
+                    <option value="11ª Esquadrilha">11ª Esquadrilha</option>
+                    <option value="12ª Esquadrilha">12ª Esquadrilha</option>
+                </select>
+
+                <label for="foto">Escolher Foto:</label>
+                <ul class="instructions">
+                    <li>* Largura Máxima: 450px</li>
+                    <li>* Altura Máxima: 320px</li>
+                    <li>* Orientação: Preferencialmente Paisagem</li>
+                    <li>* Antes de Adicionar uma ou mais fotos, dê um nome para elas.</li>
+                </ul>
+
+                <input type="file" id="foto" name="foto[]" accept="image/*" multiple />
+
+                <!-- Botões -->
+                <div class="botoes-popup">
+                    <button type="submit" aria-label="Botão para Enviar Foto Adicionada">Enviar</button>
+                    <button type="button" onclick="closePopup()"
+                        aria-label="Botão para Cancelar Envio de Foto">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Janela de Erro de Milhão -->
+    <div id="popupErroMilhao" class="popup-erro">
+        <div class="popup-erro-conteudo">
+            <p>Dado Incorreto!</p>
+            <button id="botaoOkErro" aria-label="Botão de Aceitação de Erro no Milhão">Ok</button>
+        </div>
+    </div>
+
+    <!-- Foto Expandida -->
+    <div class="foto-expandida">
+        <!-- Barra Superior -->
+        <div class="barra-superior">
+            <p class="titulo">Alunos formando o Nome da Turma</p>
+            <span class="botao-fechar"></span>
+        </div>
+        <!-- Setas -->
+        <button class="seta-botao seta-anterior" aria-label="Seta para voltar a Foto Anterior"><i
+                class="fa-solid fa-arrow-left"></i></button>
+        <button class="seta-botao seta-proxima"><i class="fa-solid fa-arrow-right"
+                aria-label="Seta para Avançar ara P´roxima Foto"></i></button>
+
+        <!-- Imagem Grande -->
+        <img src="../../assets/imagens/fotos/1_nomeTurma.png" class="imagem-grande"
+            alt="Alunos Formando o Nome da Turma">
+
+        <!-- Índice da Foto -->
+        <h1 class="indice">01</h1>
+    </div>
+    <!-- Popup Adicionar Foto Fim -->
+
+    <!-- Galeria de Miniaturas Início -->
+    <section class="galeria">
+        <div class="galeria-grid">
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/1_nomeTurma.png" alt="Alunos Formando o Nome da Turma" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/2_Homenagem.png" alt="Homenagem à Turma" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/3_sabreAlado.png"
+                    alt="Alunos formando Sabre Alado na Formatura 1" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/4_sabreAlado.png"
+                    alt="Alunos formando Sabre Alado na Formatura 2" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/5_Encontro1.png" alt="Encontro de Turma 1" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/6_Encontro2.png" alt="Encontro de Turma 2" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/7_Encontro3.png" alt="Encontro de Turma 3" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/8_Encontro4.png" alt="Encontro de Turma 4" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/9_Encontro5.jpg" alt="Encontro de Turma 5" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/10_Encontro6.jpg" alt="Encontro de Turma 6" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/11_Encontro7.jpg" alt="Encontro de Turma 7" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/12_moedaFrente.png" alt="Moeda Comemorativa de 30 anos - Frente" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/13_moedaVerso.png" alt="Moeda Comemorativa de 30 anos - Verso" />
+            </div>
+
+            <div class="foto">
+                <img src="../../assets/imagens/fotos/14_plpacaEEAR.png" alt="Placa da Turma exposta na EEAR" />
+            </div>
+        </div>
+    </section>
+    <!-- Galeria de Miniaturas Fim -->
+
+    <div id="popupConfirmarExclusao" class="popup-exclusao">
+        <div class="popup-conteudo">
+            <h3>Confirmar Exclusão</h3>
+            <label for="milhaoConfirmacao">Milhão:</label>
+            <div class="milhao-input-wrapper-exclusao">
+                <span class="milhao-prefixo-exclusao">91-</span>
+                <input type="text" id="milhaoConfirmacao" maxlength="4" pattern="\d{4}" class="milhao-input-exclusao" />
+            </div>
+            <label for="nomeGuerraConfirmacao">Nome de Guerra:</label>
+            <input type="text" id="nomeGuerraConfirmacao" />
+            <div class="botoes">
+                <button id="confirmarExclusao" aria-label="Botão para Confirmar Exclusão de Foto">Confirmar</button>
+                <button id="cancelarExclusao" onclick="fecharPopupExclusao()"
+                    title="Botão para Cancelar Excusão de Foto">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/javascript/fotos.js"></script>
+</body>
+
+</html>

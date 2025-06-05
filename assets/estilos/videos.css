@@ -1,0 +1,1141 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------- Preloader Início ---------- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #08068B, #0D083A);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bars {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Fundo Externo às Barras */
+.background-outside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #08068B, #0D083A);
+    z-index: 1;
+    transition: opacity 2s ease-in-out;
+}
+
+/* Barras */
+.bar {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #0a0a0a;
+    z-index: 2;
+    transition: transform 1s ease-out;
+    animation: slideBar 2s ease-in-out forwards;
+}
+
+.bar-left {
+    left: 0;
+    animation-delay: 0s;
+}
+
+.bar-right {
+    right: 0;
+    animation-delay: 0s;
+}
+
+@keyframes slideBar {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(var(--dir, 1) * 100%));
+    }
+}
+
+/* Direção das Barras */
+.bar-left {
+    --dir: -1;
+}
+
+.bar-right {
+    --dir: 1;
+}
+
+/* Texto com Efeito de Fumaça */
+.smoke-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    z-index: 1;
+    animation: revealText 3s ease-in-out 1s forwards;
+    filter: blur(6px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
+.smoke-text p {
+    color: transparent;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    -webkit-text-stroke: 2px #0000FF;
+    background: url(../imagens/3_efeito.png);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 30s linear infinite;
+}
+
+@keyframes back {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
+@keyframes revealText {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+        filter: blur(20px);
+        letter-spacing: -2px;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+        filter: blur(0);
+        letter-spacing: normal;
+    }
+}
+
+/* ---------- Preloader Fim ---------- */
+
+/* Body */
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../imagens/5_bgNomeTurma.png') no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ---------- Fim do Body ---------- */
+
+/* Início do Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+}
+
+/* Logotipo Principal */
+.logo-principal img {
+    max-height: 120px;
+    margin-left: 15rem;
+}
+
+/* Menu de Navegação */
+.menu-navegacao {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-navegacao li {
+    list-style-type: none;
+    text-align: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-navegacao li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-navegacao li a i {
+    font-size: 1.5rem;
+    margin-bottom: 0.15rem;
+    color: #0000FF;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.menu-navegacao li:hover i,
+.menu-navegacao li:hover a {
+    color: #00BFFF;
+    transform: scale(1.1);
+}
+
+
+/* Ícone Bars (Hamburger) */
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    color: #FFFFFF;
+    transform: translateX(-50%);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 340px;
+    height: auto;
+    background: rgba(0, 0, 50, 0.5);
+    border: 2px solid #00BFFF;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00BFFF;
+    padding: 1.2rem;
+    z-index: 99999;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInDropdown 0.3s ease-out;    
+}
+
+@keyframes fadeIndropdown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.dropdown-menu.active {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.dropdown-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-menu ul li a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #00CCFF;
+    border: 1px solid #00CCFF;
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
+}
+
+.dropdown-menu ul li a:active {
+    background: #00CCFF;
+    color: #000033;
+}
+
+/* Botão Revista dentro do Dropdown Menu */
+.dropdown-action-btn {
+    width: 100%;
+    padding: 10px 16px;
+    background: #00BFFF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.dropdown-action-btn:active {
+    background-color: #4C8FF8;
+    color: #001133;
+}
+
+/* Botão Revista */
+.botao-header button {
+    display: flex;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #FFFFFF, 0 0 10px #0000FF, 0 0 20px #0000CD;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-right: 15rem;
+}
+
+.botao-header button:hover {
+    background: #FFFFFF;
+    color: #0000FF;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+/* Logotipo Secundário */
+.logo-secundario {
+    display: none;
+}
+
+.logo-secundario img {
+    display: none;
+    max-height: 80px;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+/* ---------- Fim do Header ---------- */
+
+/* galeria de Vídeos */
+.galeria-heading p {
+    color: transparent;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 10px;
+    -webkit-text-stroke: 2px #0000FF;
+    background: url(../../assets/imagens/3_efeito.png);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 30s linear infinite;
+}
+
+@keyframes back {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
+.popup-video {
+    display: none;
+    /* Começa oculto */
+    position: fixed;
+    top: 15%;
+    left: 25%;
+    width: 90vw;
+    max-width: 1000px;
+    max-height: 700px;
+    height: 100%;
+    background: transparent;
+    border: 2px solid #0000CD;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 999;
+    flex-direction: column;
+}
+
+.popup-video.show {
+    display: flex;
+}
+
+/* Barra Superior */
+.popup-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0000CD;
+    color: #FFFFFF;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.close-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #87CEFA;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 15px;
+    border: none;
+    right: 10px;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.close-btn::after {
+    width: 15px;
+    height: 2px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-btn::before {
+    width: 15px;
+    height: 2px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Área de Vídeo */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    background-color: #000000;
+}
+
+.video-container iframe,
+.video-container video {
+    width: 100%;
+    height: 100%;
+
+}
+
+/* Setas de Navegação */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.prev-btn {
+    margin-left: 10px;
+}
+
+.next-btn {
+    margin-right: 10px;
+}
+
+/* Barra Inferior */
+.popup-footer {
+    background-color: #0000CD;
+    color: #FFFFFF;
+    padding: 10px;
+    text-align: right;
+}
+
+#video-counter {
+    font-size: 1.2rem;
+}
+
+/* Galeria de Thumbnails */
+.thumbnail-gallery {
+    background-color: transparent;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.thumbnail {
+    width: 336px;
+    border: 2px solid #0000FF;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.4);
+}
+
+/* Responsividades */
+@media (max-width: 1024px) {
+
+    /* Início do Preloader */
+    .smoke-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        text-align: center;
+        opacity: 0;
+        z-index: 1;
+        animation: revealText 3s ease-in-out 1s forwards;
+        filter: blur(6px);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+
+    .smoke-text p {
+        color: transparent;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        -webkit-text-stroke: 2px #0000FF;
+        background: url(../imagens/3_efeito.png);
+        background-clip: text;
+        background-position: 0 0;
+        animation: back 30s linear infinite;
+    }
+
+    @keyframes back {
+        100% {
+            background-position: 2000px 0;
+        }
+    }
+
+    @keyframes revealText {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            filter: blur(20px);
+            letter-spacing: -2px;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.5);
+            filter: blur(0);
+            letter-spacing: normal;
+        }
+    }
+
+    .logo-principal img {
+        margin-left: 7rem;
+    }
+
+    .menu-navegacao {
+        display: none;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        max-width: 500px;
+        top: 10%;
+        padding: 1rem;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .botao-header button {
+        display: none;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 7rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+    }
+    /* Header Fim */
+
+    /* Cabeçalho da Galeria de Vídeos */
+    .galeria-heading {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .galeria-heading p {
+        color: #FFFFFF;
+        font-size: 1.7rem;
+        font-weight: 500;
+        margin-top: 0;
+    }
+
+    /* galeria de Thumbnails */
+    .thumbnail {
+        width: 300px;
+    }
+
+    .popup-video {
+        top: 10%;
+        left: 5%;
+        width: 90vw;
+        height: 75vh;
+        max-width: 90vw;
+        max-height: 75vh;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* Início do Preloader */
+    .smoke-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        text-align: center;
+        opacity: 0;
+        z-index: 1;
+        animation: revealText 3s ease-in-out 1s forwards;
+        filter: blur(6px);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+
+    .smoke-text p {
+        color: transparent;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        -webkit-text-stroke: 2px #0000FF;
+        background: url(../imagens/3_efeito.png);
+        background-clip: text;
+        background-position: 0 0;
+        animation: back 30s linear infinite;
+    }
+
+    @keyframes back {
+        100% {
+            background-position: 2000px 0;
+        }
+    }
+
+    @keyframes revealText {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            filter: blur(20px);
+            letter-spacing: -2px;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.5);
+            filter: blur(0);
+            letter-spacing: normal;
+        }
+    }
+
+    .logo-principal img {
+        margin-left: 3rem;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        max-width: 340px;
+        top: 15%;
+        padding: 1rem;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 3rem;
+    }
+
+    /* Cabeçalho da Galeria de Fotos */
+    .galeria-heading {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .galeria-heading p {
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 430px) {
+
+    /* Início do Preloader */
+    .smoke-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        text-align: center;
+        opacity: 0;
+        z-index: 1;
+        animation: revealText 3s ease-in-out 1s forwards;
+        filter: blur(6px);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+
+    .smoke-text p {
+        color: transparent;
+        font-size: 1.3rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        -webkit-text-stroke: 2px #0000FF;
+        background: url(../imagens/3_efeito.png);
+        background-clip: text;
+        background-position: 0 0;
+        animation: back 30s linear infinite;
+    }
+
+    @keyframes back {
+        100% {
+            background-position: 2000px 0;
+        }
+    }
+
+    @keyframes revealText {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            filter: blur(20px);
+            letter-spacing: -2px;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.5);
+            filter: blur(0);
+            letter-spacing: normal;
+        }
+    }
+
+    .logo-principal img {
+        margin-left: 1rem;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        max-width: 340px;
+        top: 15%;
+        padding: 1rem;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 2rem;
+    }
+
+    /* Seção Vídeos */
+    .galeria-heading p {
+        color: #FFFFFF;
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-top: 0;
+    }
+
+    /* Galeria de Thumbnails */
+    .thumbnail {
+        width: 90%;
+    }
+
+    .popup-video {
+        top: 10%;
+        left: 5%;
+        width: 90vw;
+        height: 70vh;
+        max-width: 90vw;
+        max-height: 70vh;
+        border-radius: 8px;
+    }
+
+    .popup-header h3 {
+        font-size: 1.2rem;
+        word-break: break-word;
+    }
+
+    .popup-footer {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Início do Preloader */
+    .smoke-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        text-align: center;
+        opacity: 0;
+        z-index: 1;
+        animation: revealText 3s ease-in-out 1s forwards;
+        filter: blur(6px);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+
+    .smoke-text p {
+        color: transparent;
+        font-size: 0.8rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        -webkit-text-stroke: 2px #0000FF;
+        background: url(../imagens/3_efeito.png);
+        background-clip: text;
+        background-position: 0 0;
+        animation: back 30s linear infinite;
+    }
+
+    @keyframes back {
+        100% {
+            background-position: 2000px 0;
+        }
+    }
+
+    @keyframes revealText {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            filter: blur(20px);
+            letter-spacing: -2px;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.5);
+            filter: blur(0);
+            letter-spacing: normal;
+        }
+    }
+
+    .logo-principal img {
+        margin-left: 1rem;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        max-width: 340px;
+        top: 18%;
+        padding: 1rem;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 1rem;
+    }
+
+    /* Seção Videos */
+    .galeria-heading p {
+        color: #FFFFFF;
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-top: 0;
+    }
+
+    /* Galeria de Thumbnails */
+    .thumbnail {
+        width: 90%;
+    }
+
+    .popup-video {
+        top: 10%;
+        left: 5%;
+        width: 90vw;
+        height: 70vh;
+        max-width: 90vw;
+        max-height: 70vh;
+        border-radius: 8px;
+    }
+
+    .popup-header h3 {
+        font-size: 1.2rem;
+        word-break: break-word;
+    }
+
+    .popup-footer {
+        font-size: 1rem;
+    }
+}

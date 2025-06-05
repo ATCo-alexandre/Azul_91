@@ -1,0 +1,839 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Preloader Início */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+    background-color: #00BFFF;
+    border-radius: 50%;
+    animation: pulseStar 3s forwards, glowBlink 1.5s infinite;
+    position: absolute;
+    z-index: 2;
+    box-shadow:
+        0 0 10px #00BFFF,
+        0 0 20px #00BFFF,
+        0 0 30px #00BFFF;
+    opacity: 1;
+}
+
+@keyframes pulseStar {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(5);
+    }
+}
+
+@keyframes glowBlink {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 10px #00BFFF,
+            0 0 20px #00BFFF,
+            0 0 30px #00BFFF;
+        opacity: 1;
+    }
+
+    50% {
+        box-shadow:
+            0 0 15px #00BFFF,
+            0 0 25px #00BFFF,
+            0 0 40px #00BFFF;
+        opacity: 0.85;
+    }
+}
+
+.planet {
+    width: 20px;
+    height: 20px;
+    background-color: #00CCFF;
+    border-radius: 50%;
+    position: absolute;
+    animation: moveToCenter 4s ease-in forwards;
+    z-index: 1;
+    box-shadow: 0 0 8px #00CCFF;
+}
+
+@keyframes moveToCenter {
+    to {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+}
+
+.final-text {
+    font-size: 4rem;
+    color: #00CCFF;
+    margin-top: 15rem;
+    text-shadow: 0 0 10px #00CCFF, 0 0 20px #0099CC;
+    opacity: 0;
+    transform: scaleX(0);
+    animation: slideExpand 1s ease-out forwards;
+    animation-delay: 5s;
+    transform-origin: center;
+}
+
+@keyframes slideExpand {
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+/* Preloader Fim */
+
+/* Body */
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../imagens/5_bgNomeTurma.png') no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+/* Fim do Body */
+
+/* Início do Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+}
+
+/* Logotipo Principal */
+.logo-principal img {
+    max-height: 120px;
+    margin-left: 15rem;
+}
+
+/* Menu de Navegação */
+.menu-navegacao {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-navegacao li {
+    list-style-type: none;
+    text-align: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-navegacao li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-navegacao li a i {
+    font-size: 1.5rem;
+    margin-bottom: 0.15rem;
+    color: #0000FF;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.menu-navegacao li:hover i,
+.menu-navegacao li:hover a {
+    color: #00BFFF;
+    transform: scale(1.1);
+}
+
+/* Ícone Bars (Hamburger) */
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    color: #FFFFFF;
+    transform: translateX(-50%);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 340px;
+    background: rgba(0, 0, 50, 0.5);
+    border: 2px solid #00BFFF;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00BFFF;
+    padding: 1.2rem;
+    z-index: 99999;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInDropdown 0.3s ease-out;
+}
+
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.dropdown-menu.active {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.dropdown-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-menu ul li a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #00CCFF;
+    border: 1px solid #00CCFF;
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
+}
+
+.dropdown-menu ul li a:active {
+    background: #00CCFF;
+    color: #000033;
+}
+
+/* Botão Revista dentro do Dropdown Menu */
+.dropdown-action-btn {
+    width: 100%;
+    padding: 10px 16px;
+    background: #00BFFF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.dropdown-action-btn:active {
+    background-color: #4C8FF8;
+    color: #001133;
+}
+
+/* Botão Revista */
+.botao-header button {
+    display: flex;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #FFFFFF, 0 0 10px #0000FF, 0 0 20px #0000CD;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-right: 15rem;
+}
+
+.botao-header button:hover {
+    background: #FFFFFF;
+    color: #0000FF;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+/* Logotipo Secundário */
+.logo-secundario {
+    display: none;
+}
+
+.logo-secundario img {
+    display: none;
+    max-height: 80px;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+/* Fim do Header */
+
+/* Seção Sobre */
+.sobre {
+    min-height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: transparent;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.principal {
+    width: 1290px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Imagem */
+.imagem-sobre {
+    margin-top: 5px;
+    width: 48%;
+    max-width: 100%;
+    height: auto;
+    animation: zoomIn 10s ease-in-out;
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.5) rotateY(360deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Texto */
+.texto-sobre {
+    width: 48%;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+.texto-sobre h1 {
+    font-size: 1.5rem;
+    color: transparent;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.8rem;
+    -webkit-text-stroke: 2px #0000FF;
+    background: url(../../assets/imagens/3_efeito.png);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 30s linear infinite;
+}
+
+@keyframes back {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
+.texto-sobre p {
+    font-size: 1.2rem;
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Responsividades */
+@media (max-width: 1024px) {
+    /* Início do Preloader */
+    .final-text {
+        font-size: 3.5rem;
+        color: #00CCFF;        
+    }
+
+    .logo-principal img {
+        margin-left: 7rem;
+    }
+
+    .menu-navegacao {
+        display: none;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2.5rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        height: auto;
+        max-width: 450px;
+        top: 100px;
+        padding: 1rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .botao-header button {
+        display: none;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 7rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+    }
+    /* Header Fim */
+
+    /* Seção Sobre */
+    .sobre {
+        height: auto;
+        padding: 20px 0 40px;
+    }
+
+    .principal {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .principal img {
+        width: 450px;
+        margin-bottom: 20px;
+    }
+
+    .texto-sobre {
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    .texto-sobre h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .texto-sobre p {
+        font-size: 1.1rem;
+        line-height: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Início do Preloader */
+    .final-text {
+        font-size: 3rem;
+        color: #00CCFF;        
+    }
+
+    .logo-principal img {
+        margin-left: 3rem;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        height: auto;
+        max-width: 340px;
+        top: 80px;
+        padding: 1rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 3rem;
+    }
+
+    /* Seção Sobre */
+    .principal img {
+        width: 250px;
+        height: auto;
+        margin-top: 0;
+        margin-bottom: 18px;
+    }
+
+    .texto-sobre h1 {
+        font-size: 1.3rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .texto-sobre p {
+        font-size: 0.9rem;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 430px) {
+    /* Início do Preloader */
+    .final-text {
+        font-size: 2.5rem;
+        color: #00CCFF;        
+    }
+
+    .logo-principal img {
+        margin-left: 1rem;
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        height: auto;
+        max-width: 340px;
+        top: 80px;
+        padding: 1rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 0 2rem;
+    }
+
+    /* Seção Sobre */
+    .principal img {
+        width: 260px;
+        margin-bottom: 15px;
+    }
+
+    .texto-sobre h1 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .texto-sobre p {
+        font-size: 0.95rem;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Início do Preloader */
+    .final-text {
+        font-size: 2.5rem;
+        color: #00CCFF;        
+    }   
+
+    .logo-principal img {
+        display: block;
+        margin-top: 0;
+        margin-left: 0;        
+    }
+
+    /* Ícone Bars */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        width: 80vw;
+        height: auto;
+        max-width: 340px;
+        top: 50px;
+        padding: 1rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    /* Botão Revista dentro do Dropdown Menu */
+    .dropdown-action-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    /* Logotipo Secundário */
+    .logo-secundario {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        padding: 0 1rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+        margin-top: 0;
+        margin-right: 0;
+    }
+
+    /* Seção Sobre */
+    .sobre img {
+        top: 10%;
+        width: 220px;
+        margin-bottom: 12px;
+    }
+
+    .texto-sobre h1 {
+        font-size: 1rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .texto-sobre p {
+        font-size: 0.9rem;
+        line-height: 20px;
+    }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imagens/1_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/estilos/videos.css">
+    <title>Azul 91 - Vídeos</title>
+
+    <!-- Ícones Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="bars">
+            <div class="bar bar-left"></div>
+            <div class="bar bar-right"></div>
+            <div class="smoke-text">
+                <p>Memórias em Vídeos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Início do Header -->
+    <header>
+        <!-- Logotipo Principal -->
+        <div class="logo-principal espacamento-extremos">
+            <img src="../imagens/2_logoPrimario.gif" alt="Logotipo Animado da Turma Azul 91">
+        </div>
+
+        <!-- Menu de Navegação -->
+        <nav>
+            <ul class="menu-navegacao">
+                <li><a href="../../index.html"><i class="fa-solid fa-home"></i><span>Home</span></a></li>
+                <li><a href="../../assets/html/sobre.html"><i class="fa-solid fa-users"></i><span>Sobre</span></a></li>
+                <li><a href="../../assets/html/fotos.html"><i class="fa-solid fa-camera"></i><span>Fotos</span></a></li>
+                <li><a href="../../assets/html/tarjetas.html"><i class="fa-solid fa-id-badge"></i><span>Tarjetas</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Ícone Bars -->
+        <div class="menu-dropdown">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../assets/html/sobre.html">Sobre</a></li>
+                <li><a href="../../assets/html/fotos.html">Fotos</a></li>
+                <li><a href="../../assets/html/tarjetas.html">Tarjetas</a></li>
+            </ul>
+
+            <!-- Botão para Acesso à Revista Digital -->
+            <button class="dropdown-action-btn" aria-label="Botão para Visualizar a Revista Eletrônica da Turma Azul 91">Revista</button>
+        </div>
+
+        <!-- Botões -->
+        <div class="botao-header">
+            <button class="botao-revista" aria-label="Botão para Visualizar a Revista Eletrônica da Turma Azul 91">Revista</button>
+        </div>
+
+        <!-- Logotipo Secundário -->
+        <div class="logo-secundario">
+            <img src="../imagens/4_logoSecundario.png" alt="Logotipo Estático da Turma Azul 91">
+        </div>
+    </header>
+    <!-- Fim do Header -->
+
+    <!-- Cabeçalho da Galeria de Vídeos -->
+    <div class="galeria-heading">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+    </div>
+
+    <!-- Popup de Vídeo -->
+    <div id="popup-video" class="popup-video">
+        <!-- Barra Superior -->
+        <div class="popup-header">
+            <h3 id="video-title"></h3>
+            <button id="close-popup" class="close-btn" aria-label="Botão para Fehcra Janela de Vídeo"></button>
+        </div>
+
+        <!-- Área de Vídeo -->
+        <div class="video-container">
+            <!-- Vídeo será inserido via JavaScript -->
+        </div>
+
+        <!-- Setas de Navegação -->
+        <div class="navigation">
+            <button class="nav-btn prev-btn" aria-label="Seta para voltar ao Vídeo Anterior">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button class="nav-btn next-btn" aria-label="Seta para avançar ao Próximo Vídeo">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Barra Inferior - Contador -->
+        <div class="popup-footer">
+            <span id="video-counter">01</span>
+        </div>
+    </div>
+
+    <!-- Galeria de Thumbnails -->
+    <div class="thumbnail-gallery">
+        <!-- 1ª Série -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//1_primeira_serie.png" alt="Vídeo 1ª Série da Azul 91" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//1_primeira_serie.mp4" />
+
+        <!-- Placar dos 100 Dias -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//2_placar_100_dias.png" alt="Placar dos 100 Dias" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//2_placar_100_dias.mp4" />
+
+        <!-- Alvorada Festiva -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//3_alvorada_festiva.png" alt="Alvorada Festiva" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//3_alvorada_festiva.mp4" />
+
+        <!-- Formatura -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//4_formatura_Azul_91.png" alt="Vídeo 1ª Série da Azul 91" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//4_formatura_Azul_91.mp4" />
+
+        <!-- Jubileu de Prata 2016 EEAR -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//5_jubileu_de_prata_eear_2016.png" alt="Jubileu de Prata 2016 EEAR" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//5_jubileu_de_prata_eear_2016.mp4" />
+
+        <!-- Encontro de Turma 2017 - Brasília (local) -->
+        <img src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/thumbnails//6_encontro_2017.png" alt="Encontro de Turma 2017 - Brasília" class="thumbnail" data-type="local" data-src="https://ehrsonmsjtnsfnznitsl.supabase.co/storage/v1/object/public/videos//6_encontro_2017.mp4" />
+    </div>
+
+    <script src="../../assets/javascript/videos.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/imagens/1_favicon.png" type="image/x-icon">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../../assets/estilos/tarjetas.css">
+    <title>Azul 91 - Tarjetas</title>
+
+    <!-- Ícones Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="flash-circle"></div>
+        <div class="titulo" id="titulo">
+            <span class="letra letra-0">G</span>
+            <span class="letra letra-1">e</span>
+            <span class="letra letra-2">r</span>
+            <span class="letra letra-3">a</span>
+            <span class="letra letra-4">d</span>
+            <span class="letra letra-5">o</span>
+            <span class="letra letra-6">r</span>
+            <span class="letra letra-7"> </span>
+            <span class="letra letra-8">d</span>
+            <span class="letra letra-9">e</span>
+            <span class="letra letra-10"> </span>
+            <span class="letra letra-11">T</span>
+            <span class="letra letra-12">a</span>
+            <span class="letra letra-13">r</span>
+            <span class="letra letra-14">j</span>
+            <span class="letra letra-15">e</span>
+            <span class="letra letra-16">t</span>
+            <span class="letra letra-17">a</span>
+            <span class="letra letra-18">s</span>
+        </div>
+    </div>
+    <!-- Preloader Fim -->
+
+    <!-- Início do Header -->
+    <header>
+        <!-- Logotipo Principal -->
+        <div class="logo-principal">
+            <img src="../../assets/imagens/2_logoPrimario.gif" alt="Logotipo Animado da Turma Azul 91">
+        </div>
+
+        <!-- Menu de Navegação -->
+        <nav>
+            <ul class="menu-navegacao">
+                <li><a href="../../index.html"><i class="fa-solid fa-home"></i><span>Home</span></a></li>
+                <li><a href="../../assets/html/sobre.html"><i class="fa-solid fa-users"></i><span>Sobre</span></a></li>
+                <li><a href="../../assets/html/videos.html"><i class="fa-solid fa-video"></i><span>Vídeos</span></a>
+                </li>
+                <li><a href="../../assets/html/fotos.html"><i class="fa-solid fa-camera"></i><span>Fotos</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Ícone Bars -->
+        <div class="menu-dropdown">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../assets/html/sobre.html">Sobre</a></li>
+                <li><a href="../../assets/html/videos.html">Vídeos</a></li>
+                <li><a href="../../assets/html/fotos.html">Fotos</a></li>
+            </ul>
+
+            <!-- Botão dentro do Dropdown Menu -->
+            <button class="dropdown-action-btn botao-gerar">Gerar Tarjeta</button>
+        </div>
+
+        <!-- Botao -->
+        <div id="btnGerarTarjeta" class="botao-header">
+            <button class="botao-gerar">Gerar Tarjeta</button>
+        </div>
+
+        <!-- Logotipo Secundário -->
+        <div class="logo-secundario">
+            <img src="../../assets/imagens/4_logoSecundario.png" alt="Logotipo Estático da Turma Azul 91">
+        </div>
+    </header>
+    <!-- Fim do Header -->
+
+    <!-- Cabeçalho Início -->
+    <div class="cabecalho-tarjeta">
+        <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <!-- cabeçalho Fim -->
+
+    <!-- Popup Gerador de Tarjeta Início -->
+    <div id="popupUpload" class="popup">
+        <div class="popup-content">
+            <h2 class="popup-title">Gerador de Tarjeta</h2>
+            <img src="../../assets/imagens/9_tarjetaGenerica.png" alt="Modelo Tarjeta de Aluno" class="popup-icon">
+            <span class="close-btn" onclick="closePopup()" aria-label="Fechar Popup Gerar Tarjeta">&times;</span>
+
+            <!-- Formulário Gerar Tarjeta -->
+            <form id="uploadForm" action="#" method="post" enctype="multipart/form-data">
+                <!-- Campos do Formulário -->
+                <label for="milhao">Milhão:</label>
+                <div class="milhao-input-wrapper">
+                    <span class="milhao-prefixo">91-</span>
+                    <input type="text" id="milhao" maxlength="4" pattern="\d{4}" name="milhao" class="milhao-input"
+                        placeholder="" required>
+                </div>
+
+                <!-- Nome de Guerra -->
+                <label for="nomeGuerra">Nome de Guerra:</label>
+                <input type="text" id="nomeGuerra" name="nomeGuerra" required maxlength="50"
+                    placeholder="Digite seu Nome de Guerra" />
+
+                <!-- Botões -->
+                <div class="botao-popup">
+                    <button type="submit">Gerar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup Erro de Milhão -->
+    <div id="popupErroMilhao" class="popup-erro">
+        <div class="popup-erro-conteudo">
+            <p>Dado Incorreto!</p>
+            <button id="botaoOkErro">Ok</button>
+        </div>
+    </div>
+
+    <!-- Tarjeta Genérica -->
+    <div class="tarjeta-generica">
+        <!-- Tarjeta -->
+        <div class="tarjeta">
+            <div class="tarjeta-esquerda">
+                <div class="tarjeta-label">ALUNO</div>
+                <div class="tarjeta-milhao">00-0000</div>
+            </div>
+
+            <div class="tarjeta-direita">
+                <div class="tarjeta-nome">AZUL 91</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjetas com Grito de Guerra -->
+    <div id="grito-container"></div>
+
+    <!-- Container da Tarjeta Final Início -->
+    <div id="tarjetaFinalContainer" class="tarjeta-final-container">
+        <div id="tarjetaFinal" class="tarjeta">
+            <div class="tarjeta-esquerda">
+                <div class="tarjeta-label" id="finalAluno"></div>
+                <div class="tarjeta-milhao" id="finalMilhao"></div>
+            </div>
+            <div class="tarjeta-direita">
+                <div class="tarjeta-nome" id="finalNome"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader e Mensagem -->
+    <div id="tarjetaLoader" class="tarjeta-loader">
+        <div class="loader"></div>
+        <p>Gerando Tarjeta. Aguarde...</p>
+    </div>
+    <!-- Container da Tarjeta Final Fim -->
+
+    <!-- Botão Ver Tarjeta Início -->
+    <div id="btnVerTarjetaContainer" class="ver-tarjeta-container">
+        <button id="btnVerTarjeta" class="botao-ver-tarjeta">Ver Tarjeta</button>
+    </div>
+    <!-- Botão Ver Tarjeta Fim -->
+
+    <!-- Popup Tarjeta Expandida -->
+    <div id="popupTarjetaExpandida" class="popup-expandida">
+        <div class="popup-expandida-header">
+            <span id="tituloExpandido">Tarjeta de NOME</span>
+            <button id="fecharExpandida" class="botao-fechar-expandida"
+                aria-label="Fechar Popup Tarjeta Expandida">&times;</button>
+        </div>
+        <div class="popup-expandida-body">
+            <div id="areaTarjetaExpandida" class="tarjeta-expandida-interna"></div>
+        </div>
+        <div class="popup-expandida-footer">
+            <button id="btnSalvarExpandida" class="botao-salvar-expandida"
+                aria-label="Botão para Salvar Tarjeta em Dispositivos">Salvar Tarjeta</button>
+        </div>
+    </div>
+
+    <!-- Biblioteca html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script src="../../assets/javascript/tarjetas.js"></script>
+</body>
+
+</html>

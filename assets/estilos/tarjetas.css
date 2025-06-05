@@ -1,0 +1,2583 @@
+@charset "UTF-8";
+
+/* Fontes do Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Preloader Início */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.flash-circle {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(0, 140, 255, 0.7), transparent 80%);
+    border-radius: 50%;
+    position: absolute;
+    animation: expand-flash 3s ease-out forwards;
+    z-index: 1;
+}
+
+@keyframes expand-flash {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(45);
+        opacity: 0;
+    }
+}
+
+.titulo {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    z-index: 2;
+}
+
+.letra {
+    font-size: 4.5rem;
+    color: #00CCFF;
+    text-shadow: 0 0 10px #00CCFF, 0 0 20px #0099CC;
+    opacity: 0;
+    transform: translate(0, 0);
+    animation: dispersar 1.2s ease-out, reagrupar 1s ease-in forwards, piscar 0.5s steps(2, end);
+    animation-delay: calc(var(--i) * 0.1s), calc(2.2s + var(--i) * 0.1s), calc(3.3s + var(--i) * 0.1s);
+}
+
+.letra-0 {
+    --i: 0;
+}
+
+.letra-1 {
+    --i: 1;
+}
+
+.letra-2 {
+    --i: 2;
+}
+
+.letra-3 {
+    --i: 3;
+}
+
+.letra-4 {
+    --i: 4;
+}
+
+.letra-5 {
+    --i: 5;
+}
+
+.letra-6 {
+    --i: 6;
+}
+
+.letra-7 {
+    --i: 7;
+}
+
+.letra-8 {
+    --i: 8;
+}
+
+.letra-9 {
+    --i: 9;
+}
+
+.letra-10 {
+    --i: 10;
+}
+
+.letra-11 {
+    --i: 11;
+}
+
+.letra-12 {
+    --i: 12;
+}
+
+.letra-13 {
+    --i: 13;
+}
+
+.letra-14 {
+    --i: 14;
+}
+
+.letra-15 {
+    --i: 15;
+}
+
+.letra-16 {
+    --i: 16;
+}
+
+.letra-17 {
+    --i: 17;
+}
+
+.letra-18 {
+    --i: 18;
+}
+
+@keyframes dispersar {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(250px * cos(var(--i))), calc(250px * sin(var(--i))));
+        opacity: 0;
+    }
+}
+
+@keyframes reagrupar {
+    from {
+        transform: translate(calc(250px * cos(var(--i))), calc(250px * sin(var(--i))));
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes piscar {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Preloader Fim */
+
+/* Body Início */
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../../assets/imagens/5_bgNomeTurma.png') no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Body Fim */
+
+/* Header Início */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0.25rem 0;
+    background-color: transparent;
+}
+
+/* Logotipo Principal */
+.logo-principal img {
+    max-height: 120px;
+    margin-left: 15rem;
+}
+
+/* Menu de Navegação */
+.menu-navegacao {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-navegacao li {
+    list-style-type: none;
+    text-align: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-navegacao li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-navegacao li a i {
+    font-size: 1.5rem;
+    margin-bottom: 0.15rem;
+    color: #0000FF;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.menu-navegacao li:hover i,
+.menu-navegacao li:hover a {
+    color: #00BFFF;
+    transform: scale(1.1);
+}
+
+/* Ícone Bars */
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    color: #FFFFFF;
+    transform: translateX(-50%);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 340px;
+    background: rgba(0, 0, 50, 0.5);
+    border: 2px solid #00BFFF;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00BFFF;
+    padding: 1.2rem;
+    z-index: 99999;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInDropdown 0.3s ease-out;
+}
+
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.dropdown-menu.active {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.dropdown-menu ul li a:active {
+    background: #00CCFF;
+    color: #000033;
+}
+
+.dropdown-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-menu ul li a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #00CCFF;
+    border: 1px solid #00CCFF;
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Botão Gerar Tarjeta dentro do Dropdown Menu Início */
+.dropdown-action-btn {
+    width: 100%;
+    padding: 10px 16px;
+    background: #00BFFF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.dropdown-action-btn:active {
+    background-color: #4C8FF8;
+    color: #001133;
+}
+/* Botão Gerar Tarjeta dentro do Dropdown Menu Fim */
+
+/* Botão Gerar Tarjeta dentro do Header Início */
+.botao-header button {
+    display: flex;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 10rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.7rem;
+    box-shadow: 0 0 5px #FFFFFF, 0 0 10px #0000FF, 0 0 20px #0000CD;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-right: 15rem;
+}
+
+.botao-header button:hover {
+    background: #FFFFFF;
+    color: #0000FF;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+/* Botão Gerar Tarjeta dentro do Header Fim */
+
+/* Logotipo Secundário Início */
+.logo-secundario {
+    display: none;
+}
+
+.logo-secundario img {
+    display: none;
+    max-height: 80px;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+/* Logotipo Secundário Fim */
+/* Header Fim */
+
+/* Popup Gerar Tarjeta Início */
+.popup {
+    color: #FFFFFF;
+    font-weight: 600;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 400px;
+    max-height: 90vh;
+    background-color: #87CEFA;
+    border: 2px solid #0000FF;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+#popupUpload {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+}
+
+.popup form {
+    padding-bottom: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.popup label {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    color: #0000FF;
+    font-weight: 600;
+}
+
+.popup input {
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    font-size: 1rem;
+    border: 2px solid #0000FF;
+    border-radius: 5px;
+    color: #0000FF;
+}
+
+.popup button {
+    margin-top: 10px;
+    padding: 10px 15px;
+}
+
+.popup-content {
+    display: flex;
+    padding: 10px 15px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    justify-content: space-between;
+}
+
+.popup-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0000FF;
+    text-align: left;
+    margin: 0;
+}
+
+.popup-icon {
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    margin-top: -10px;
+}
+
+.popup .close-btn {
+    font-size: 2rem;
+    color: #0000CD;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    transition: transform 0.2s;
+}
+
+.popup .close-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Botão Gerar Dentro do Popup Gerador de Tarjeta */
+.botao-popup {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: auto;
+    padding-bottom: 10px;
+}
+
+.botao-popup button {
+    background-color: #0000FF;
+    color: #FFFFFF;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 2px double #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s, color 0.3s;
+    width: 200px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #1E90FF;
+    color: #0000FF;
+}
+
+/* Formulário Gerador de Tarjeta */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 620px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #0000FF;
+}
+
+.milhao-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.milhao-prefixo {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #0000FF;
+    margin-right: 0.1rem;
+}
+
+.milhao-input {
+    width: 80px;
+    padding: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Tarjeta */
+.tarjeta {
+    display: none;
+    width: 320px;
+    height: 57px;
+    background-color: #000080;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: scale(1.05);
+}
+
+.tarjeta-esquerda {
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.milhao {
+    color: #FFFFFF;
+    font-size: 22px;
+}
+
+.tarjeta-label,
+.tarjeta-milhao {
+    line-height: 1.2;
+}
+
+.tarjeta-direita {
+    width: 66.67%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.tarjeta-nome {
+    text-align: center;
+}
+
+/* Popup de Erro de Milhão */
+.popup-erro {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2000;
+    padding-top: 50px;
+}
+
+.popup-erro-conteudo {
+    background-color: #FFFFFF;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.popup-erro-conteudo p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.popup-erro-conteudo button {
+    background-color: #2051E2;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#popupErroMilhao {
+    display: none;
+    z-index: 9999;
+}
+/* Popup Gerar Tarjeta Fim */
+
+/* Cabeçalho Popup Gerador de Tarjeta Início */
+.cabecalho-tarjeta p {
+    color: transparent;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 10px;
+    -webkit-text-stroke: 2px #0000FF;
+    background: url(../../assets/imagens/3_efeito.png);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 30s linear infinite;
+}
+
+@keyframes back {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
+/* Desfoque no texto do heading quando o menu estiver aberto */
+body.menu-open .cabecalho-tarjeta p {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+}
+
+/* Cabeçalho Cabeçalho Tarjeta Fim */
+
+/* Oculta Ícone Bars do Dropdown Menu */
+.escondido {
+    display: none !important;
+}
+
+/* Animações da Tela */
+#grito-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.miniatura-animada {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px solid #ffffff !important;
+    border-radius: 4px !important;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.moeda-container {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    perspective: 600px;
+    z-index: 2;
+}
+
+.moeda {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.moeda-face {
+    position: absolute;
+    width: 170%;
+    height: 170%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    object-fit: cover;
+}
+
+.moeda-frente {
+    transform: rotateY(0deg);
+}
+
+.moeda-verso {
+    transform: rotateY(180deg);
+}
+
+.tarjeta-generica {
+    position: fixed;
+    background-color: #000080;
+    color: #FFFFFF;
+    font-size: 1rem;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 350px;
+    white-space: normal;
+    opacity: 1;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+    z-index: 9999;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Container da Tarjeta Expadida Centralizado */
+#tarjeta-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 600px;
+    background: transparent;
+    z-index: 10000;
+    text-align: center;
+}
+
+.tarjeta-generica:not([data-valida="true"]) {
+    display: none !important;
+}
+
+/* Tarjeta Personalizada */
+.tarjeta-final-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 70vw;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.tarjeta {
+    transform: scale(0.3) rotate(0deg);
+    transition: transform 0.4s ease;
+    animation: spinTarjeta 1s linear infinite;
+}
+
+@keyframes spinTarjeta {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.tarjeta-loader {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 9999;
+}
+
+.tarjeta-loader p {
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #FFFFFF;
+    border-top: 5px solid #0000FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ver-tarjeta-container {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+/* Botão Salvar Tarjeta */
+.botao-download {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.botao-download:hover {
+    background-color: #1E90FF;
+}
+
+#tarjetaFinalContainer {
+    display: none;
+}
+
+#tarjetaFinal {
+    display: none;
+}
+
+/* Botão Ver Tarjeta Início */
+.botao-ver-tarjeta {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+    from {
+        box-shadow: 0 0 5px #0000FF;
+    }
+
+    to {
+        box-shadow: 0 0 20px #0000FF, 0 0 30px #0000FF;
+    }
+}
+
+.popup-tg-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Barra Superior do Popup Tarjeta Expandida */
+.popup-tg-header {
+    flex: 0 0 auto;
+    background-color: #0033AA;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botao-fechar-popup {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.popup-tg-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #F9F9F9;
+    overflow: hidden;
+}
+
+.tarjeta-grande {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1);
+    animation: none !important;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+#tarjetaExpandida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+/* Barra Inferior Popup tarjeta Expandida */
+.popup-tg-footer {
+    flex: 0 0 auto;
+    padding: 10px;
+    background-color: #EEEEEE;
+    text-align: center;
+}
+
+.botao-salvar-tarjeta {
+    background-color: #0033AA;
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Botão Ver Tarjeta Fim */
+
+/* Popup Tarjeta Expandido */
+.popup-expandida {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 70vw;
+    height: 50vh;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    z-index: 10000;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.popup-expandida-header {
+    background-color: transparent;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-expandida-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.tarjeta-expandida-interna {
+    width: 70%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-expandida-footer {
+    padding: 10px;
+    background-color: transparent;
+    text-align: center;
+}
+
+.botao-fechar-expandida {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.botao-salvar-expandida {
+    background-color: #0033AA;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tarjeta-clonada-expandida {
+    width: 70% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 1;
+    display: block;
+    margin: 0 auto;
+    transform: none !important;
+}
+
+/* Breakpoints de Responsividade */
+@media (max-width: 1024px) {
+    .letra {
+        font-size: 3rem;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+
+    .menu-navegacao,
+    .botao-header {
+        display: none !important;
+    }
+
+    /* Exibir Logotipo Animado */
+    .logo-principal {
+        display: flex !important;
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .logo-principal img {
+        max-height: 90px;
+        width: auto;
+        margin-left: 5rem;
+    }
+
+    .menu-dropdown {
+        display: flex !important;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    .dropdown-menu {
+        width: 85vw;
+        max-width: 390px;
+        padding: 1.5rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 12px;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu .dropdown-action-btn {
+        width: 100%;
+        padding: 0.9rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Exibir Logotipo Estático */
+    .logo-secundario {
+        display: flex !important;
+        align-items: center;
+        max-height: 100px;
+        width: auto;
+        margin-right: 3rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+        width: auto;
+        max-height: 85px;
+        margin-right: 4rem;
+        animation: blink 3s infinite;
+    }
+
+    .popup {
+        width: 450px;
+        height: 50vh;
+        max-width: 90vw;
+        padding: 18px;
+    }
+
+    .popup-content {
+        max-height: 90vh;
+        padding: 8px;
+    }
+
+    .popup-content img {
+        width: 300px;
+        height: auto;
+        margin-top: 5px;
+    }
+
+    .popup-title {
+        font-size: 2rem;
+        margin: 0;
+        margin-top: 0;
+    }
+
+    .popup-content label,
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 1rem;
+        padding: 6px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .botao-popup button {
+        font-size: 16px;
+        padding: 10px 16px;
+        min-width: 140px;
+    }
+
+    .botao-popup {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .botao-popup button {
+        padding: 8px 16px;
+        font-size: 0.95rem;
+    }
+
+    .milhao-input-wrapper {
+        width: 11rem;
+    }
+
+    .milhao-input {
+        height: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .cabecalho-tarjeta p {
+        font-size: 3rem;
+    }
+
+    .tarjeta-generica {
+        font-size: 15px !important;
+        padding: 10px 14px !important;
+        max-width: 220px;
+    }
+
+    .miniatura-animada {
+        width: 100px !important;
+        height: auto !important;
+        border: 1px solid #FFFFFF !important;
+        border-radius: 4px !important;
+    }
+
+    .moeda-container,
+    .moeda-face,
+    .moeda {
+        width: 130px !important;
+        height: 130px !important;
+    }
+
+    .tarjeta-final-container {
+        padding: 20px;
+    }
+
+    .tarjeta-final-container .tarjeta {
+        max-width: 440px;
+        padding: 16px 20px;
+    }
+
+    .tarjeta-final-container .tarjeta-label {
+        font-size: 15px;
+    }
+
+    .tarjeta-final-container .tarjeta-milhao {
+        font-size: 18px;
+    }
+
+    .tarjeta-final-container .tarjeta-direita {
+        font-size: 20px;
+    }
+
+    #finalNome {
+        font-size: 19px;
+    }
+
+    #popupTarjetaExpandida {
+        max-width: 520px;
+        padding: 18px;
+    }
+
+    .tarjeta-expandida-interna {
+        width: 440px;
+        height: 200px;
+        padding: 16px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-esquerda {
+        font-size: 15px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-label {
+        font-size: 16px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-milhao {
+        font-size: 18px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-direita {
+        font-size: 17px;
+        max-width: 200px;
+    }
+
+    #tituloExpandido {
+        font-size: 19px;
+    }
+
+    .popup-expandida-footer {
+        margin-top: 18px;
+    }
+
+    .botao-salvar-expandida {
+        font-size: 16px;
+        padding: 10px 18px;
+    }
+
+    .botao-fechar-expandida {
+        font-size: 24px;
+        top: 10px;
+        right: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .letra {
+        font-size: 2rem;
+    }
+
+    .header {
+        padding: 0 1rem;
+        /* Reduz o espaçamento horizontal */
+    }
+
+    .menu-navegacao,
+    .botao-header {
+        display: none !important;
+    }
+
+    /* Exibir Logotipo Animado */
+    .logo-principal {
+        display: flex !important;
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .logo-principal img {
+        max-height: 70px;
+        width: auto;
+        margin-left: 5px;
+    }
+
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    .dropdown-menu {
+        width: 60vw;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .dropdown-menu ul {
+        width: 80%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 12px;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu .dropdown-action-btn {
+        width: 80%;
+        max-width: 250px;
+        margin: 0 auto;
+        padding: 0.9rem;
+        white-space: normal;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Exibir Logotio Estático */
+    .logo-secundario {
+        display: flex !important;
+        align-items: center;
+        margin-right: 2rem;
+        max-height: 65px;
+    }
+
+    .logo-secundario img {
+        display: block;
+        max-height: 70px;
+        width: auto;
+        margin-right: 5px;
+        animation: blink 3s infinite;
+    }
+
+    .popup {
+        width: 300px;
+        height: 55vh;
+        max-width: 95vw;
+        padding: 12px;
+    }
+
+    .popup-content {
+        max-height: 88vh;
+        padding: 16px;
+    }
+
+    .popup-content img {
+        width: 80px;
+        height: auto;
+        margin-bottom: 12px;
+    }
+
+    .popup-title {
+        font-size: 1.5rem;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .popup-content label,
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+        margin-bottom: 0;
+    }
+
+    .botao-popup {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .botao-popup button {
+        padding: 6px 14px;
+        font-size: 0.9rem;
+        min-width: 120px;
+    }
+
+    .milhao-input-wrapper {
+        width: 9rem;
+    }
+
+    .milhao-input {
+        height: 30px;
+        font-size: 15px;
+    }
+
+    .cabecalho-tarjeta p {
+        font-size: 1.15rem;
+    }
+
+    .tarjeta-generica {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+        max-width: 180px;
+    }
+
+    .miniatura-animada {
+        width: 80px !important;
+        height: auto !important;
+        border: 1px solid #FFFFFF !important;
+        border-radius: 4px !important;
+    }
+
+    .moeda-container,
+    .moeda-face,
+    .moeda {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .tarjeta-final-container {
+        top: 50%;
+        left: 50%;
+        padding: 16px;
+    }
+
+    .tarjeta-final-container .tarjeta {
+        max-width: 360px;
+        padding: 12px 16px;
+    }
+
+    .tarjeta-final-container .tarjeta-label {
+        font-size: 14px;
+    }
+
+    .tarjeta-final-container .tarjeta-milhao {
+        font-size: 16px;
+    }
+
+    .tarjeta-final-container .tarjeta-direita {
+        font-size: 18px;
+    }
+
+    #finalNome {
+        font-size: 17px;
+    }
+
+    #popupTarjetaExpandida {
+        max-width: 400px;
+        padding: 14px;
+    }
+
+    .tarjeta-expandida-interna {
+        width: 340px;
+        height: 160px;
+        padding: 12px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-esquerda {
+        font-size: 14px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-label {
+        font-size: 15px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-milhao {
+        font-size: 16px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-direita {
+        font-size: 15px;
+        max-width: 160px;
+    }
+
+    #tituloExpandido {
+        font-size: 17px;
+    }
+
+    .popup-expandida-footer {
+        margin-top: 14px;
+    }
+
+    .botao-salvar-expandida {
+        font-size: 15px;
+        padding: 8px 16px;
+    }
+
+    .botao-fechar-expandida {
+        font-size: 22px;
+        top: 8px;
+        right: 14px;
+    }
+}
+
+@media (max-width: 430px) {
+    .letra {
+        font-size: 1.4rem;
+    }
+
+    .header {
+        padding: 0 1rem;
+    }
+
+    .menu-navegacao,
+    .botao-header {
+        display: none !important;
+    }
+
+    /* Exibir Logotipo Animado */
+    .logo-principal {
+        display: flex !important;
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .logo-principal img {
+        max-height: 70px;
+        width: auto;
+        margin-left: 0;
+    }
+
+    /* Exibir Ícone Bars para Dropdown Menu */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    .dropdown-menu {
+        width: 85vw;
+        height: auto;
+        max-height: 100vh;
+        border-radius: 20%;
+        max-width: 390px;
+        padding: 1rem;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 12px;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu .dropdown-action-btn {
+        width: 70%;
+        max-width: 220px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.9rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Exibir Logotipo Estático */
+    .logo-secundario {
+        display: flex !important;
+        align-items: center;
+        max-height: 55px;
+        margin-right: 1rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+        max-height: 70px;
+        width: auto;
+        animation: blink 3s infinite;
+        margin-right: 2rem;
+    }
+
+    .popup {
+        display: block;
+        width: 300px;
+        height: 70vh;
+        max-width: 95vw;
+        padding: 8px;
+    }
+
+    .popup-content {
+        padding: 12px;
+    }
+
+    .popup-content img {
+        width: 170px;
+        height: auto;
+    }
+
+    .popup-title {
+        font-size: 1.5rem;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+
+    .popup-icon {
+        display: block;
+    }
+
+    .popup-content label,
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 14px;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .botao-popup {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .botao-popup button {
+        padding: 7px 10px;
+        font-size: 14px;
+        flex: 1 1 auto;
+        min-width: 110px;
+    }
+
+    .milhao-input-wrapper {
+        width: 8rem;
+        margin: 0;
+    }
+
+    .milhao-input-wrapper input {
+        width: 100%;
+    }
+
+    .milhao-input {
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .cabecalho-tarjeta p {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .tarjeta-generica {
+        font-size: 13px !important;
+        padding: 6px 10px !important;
+        max-width: 160px;
+        border-radius: 6px;
+        transform: scale(0.9);
+    }
+
+    .miniatura-animada {
+        width: 70px !important;
+        height: auto !important;
+        border: 1px solid #ffffff !important;
+        border-radius: 4px !important;
+    }
+
+    .moeda-container,
+    .moeda-face,
+    .moeda {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    .tarjeta-final-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        top: 38%;
+        left: 18%;
+        padding: 14px;
+        transform: scale(0.9);
+    }
+
+    .tarjeta-final-container .tarjeta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: #FFFFFF;
+        background-color: #000080;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .tarjeta-final-container .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .tarjeta-final-container .tarjeta-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+
+    .tarjeta-final-container .tarjeta-milhao {
+        font-size: 15px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    .tarjeta-final-container .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    #finalNome {
+        word-break: break-word;
+        font-size: 16px;
+    }
+
+    #popupTarjetaExpandida {
+        width: 95vw;
+        max-width: 350px;
+        height: auto;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .popup-expandida-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .tarjeta-expandida-interna {
+        width: 320px;
+        height: 150px;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 13px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-label {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-milhao {
+        font-size: 15px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+
+    #tituloExpandido {
+        font-size: 16px;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+
+    .popup-expandida-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .botao-salvar-expandida {
+        font-size: 14px;
+        padding: 7px 14px;
+    }
+
+    .botao-fechar-expandida {
+        font-size: 21px;
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        color: #FFFFFF;
+    }
+}
+
+@media (max-width: 360px) {
+    .letra {
+        font-size: 1.2rem;
+    }
+
+    .header {
+        padding: 0 0.5rem;
+    }
+
+    .menu-navegacao,
+    .botao-header {
+        display: none !important;
+    }
+
+    /* Exibir Logotipo Animado */
+    .logo-principal {
+        display: flex !important;
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .logo-principal img {
+        max-height: 70px;
+        width: auto;
+        margin-left: 0;
+    }
+
+    /* Exibir Ícone Bars do dropdown Menu */
+    .menu-dropdown {
+        display: flex !important;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.2rem;
+        color: #FFFFFF;
+        z-index: 10;
+    }
+
+    .dropdown-menu {
+        width: 80vw;
+        max-width: 340px;
+        padding: 1rem;
+        border-radius: 20%;
+    }
+
+    .dropdown-menu ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu .dropdown-action-btn {
+        width: 60%;
+        max-width: 200px;
+        margin: 0 auto;
+        white-space: normal;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 1.3rem;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Exibir Logotipo Estático */
+    .logo-secundario {
+        display: flex !important;
+        align-items: center;
+        max-height: 50px;
+        margin-right: 2rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+        max-height: 70px;
+        width: auto;
+        animation: blink 3s infinite;
+        margin-right: 0;
+    }
+
+    .popup {
+        display: block;
+        width: 300px;
+        height: 65vh;
+        max-width: 95vw;
+        padding: 8px;
+    }
+
+    .popup-content {
+        padding: 10px;
+    }
+
+    .popup-content img {
+        max-width: 100%;
+        width: 150px;
+        height: auto;
+    }
+
+    .popup-title {
+        font-size: 1.3rem;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .popup-icon {
+        display: block;
+    }
+
+    .popup-content label,
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 13px;
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .botao-popup {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .botao-popup button {
+        padding: 6px 8px;
+        font-size: 13px;
+        flex: 1 1 auto;
+        min-width: 100px;
+    }
+
+    .milhao-input-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 7rem;
+        margin: 0;
+    }
+
+    .milhao-input-wrapper input {
+        width: 100%;
+    }
+
+    .milhao-input {
+        height: 26px;
+        font-size: 13px;
+    }
+
+    .cabecalho-tarjeta p {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+
+    .tarjeta-generica {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        max-width: 140px;
+        border-radius: 6px;
+        transform: scale(0.85);
+    }
+
+    .miniatura-animada {
+        width: 60px !important;
+        height: auto !important;
+        border: 1px solid #ffffff !important;
+        border-radius: 4px !important;
+    }
+
+    .moeda-container {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .moeda-face {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .moeda {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .tarjeta-final-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        top: 40%;
+        left: 15%;
+        padding: 12px;
+        transform: scale(0.85);
+    }
+
+    /* Tarjeta em si */
+    .tarjeta-final-container .tarjeta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: #FFFFFF;
+        background-color: #000080;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Lado esquerdo */
+    .tarjeta-final-container .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .tarjeta-final-container .tarjeta-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+
+    .tarjeta-final-container .tarjeta-milhao {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    /* Lado direito */
+    .tarjeta-final-container .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: right;
+    }
+
+    /* Caso tenha fontes grandes demais */
+    #finalNome {
+        word-break: break-word;
+        font-size: 15px;
+    }
+
+    #popupTarjetaExpandida {
+        width: 95vw;
+        max-width: 330px;
+        height: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .popup-expandida-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .tarjeta-expandida-interna {
+        width: 300px;
+        height: 140px;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-label {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-milhao {
+        font-size: 14px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 130px;
+    }
+
+    #tituloExpandido {
+        font-size: 15px;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+
+    .popup-expandida-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .botao-salvar-expandida {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .botao-fechar-expandida {
+        font-size: 20px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: #FFFFFF;
+    }
+}
+
+@media (max-width: 320px) {
+    .letra {
+        font-size: 1.1rem;
+    }
+
+    .header {
+        padding: 0 0.5rem;
+    }
+
+    .menu-navegacao,
+    .botao-header {
+        display: none !important;
+    }
+
+    /* Exibir logo principal */
+    .logo-principal {
+        display: flex !important;
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .logo-principal img {
+        max-height: 60px;
+        margin-left: 5px;
+    }
+
+    /* Exibir ícone bars centralizado */
+    .menu-dropdown {
+        font-size: 1.2rem;
+    }
+
+    .dropdown-menu {
+        width: 80vw;
+        height: 80vh;
+        max-width: 340px;
+        padding: 1.2rem;
+    }
+
+    .dropdown-menu ul {
+        width: 90%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+        display: block;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 20px;
+        background-color: #0000FF;
+        width: 100%;
+        text-align: center;
+        transition: background 0.3s;
+    }
+
+    .dropdown-menu .dropdown-action-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #0000FF;
+        border: 5px double #FFFFFF;
+        border-radius: 20px;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Exibir logo secundária */
+    .logo-secundario {
+        max-height: 50px;
+        margin-right: 2rem;
+    }
+
+    .logo-secundario img {
+        display: block;
+        max-height: 50px;
+        width: auto;
+        animation: blink 3s infinite;
+        margin-right: 10px;
+    }
+
+    .popup {
+        display: block;
+        width: 250px;
+        height: 90vh;
+        max-width: 95vw;
+        padding: 8px;
+    }
+
+    .popup-content {
+        padding: 10px;
+    }
+
+    .popup-content img {
+        width: 150px;
+        height: auto;
+    }
+
+    .popup-title {
+        font-size: 1.3rem;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .popup-icon {
+        display: block;
+    }
+
+    .popup-content label,
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 13px;
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .botao-popup {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .botao-popup button {
+        padding: 6px 8px;
+        font-size: 13px;
+        flex: 1 1 auto;
+        min-width: 100px;
+    }
+
+    .milhao-input-wrapper {
+        width: 7rem;
+        margin: 0;
+    }
+
+    .milhao-input-wrapper input {
+        width: 100%;
+    }
+
+    .milhao-input {
+        height: 26px;
+        font-size: 13px;
+    }
+
+    .cabecalho-tarjeta p {
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+
+    .tarjeta-generica {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        max-width: 140px;
+        border-radius: 6px;
+        transform: scale(0.85);
+    }
+
+    .miniatura-animada {
+        width: 40px !important;
+        height: auto !important;
+        border: 1px solid #ffffff !important;
+        border-radius: 4px !important;
+    }
+
+    .moeda-container {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .moeda-face {
+        width: 55px !important;
+        height: 55px !important;
+    }
+
+    .moeda {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .tarjeta-final-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        top: 40%;
+        left: 15%;
+        padding: 5px;
+        transform: scale(0.85);
+    }
+
+    /* Tarjeta em si */
+    .tarjeta-final-container .tarjeta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80vw;
+        max-width: 300px;
+        height: auto;
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: #FFFFFF;
+        background-color: #000080;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Lado esquerdo */
+    .tarjeta-final-container .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .tarjeta-final-container .tarjeta-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+
+    .tarjeta-final-container .tarjeta-milhao {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    /* Lado direito */
+    .tarjeta-final-container .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    /* Caso tenha fontes grandes demais */
+    #finalNome {
+        word-break: break-word;
+        font-size: 15px;
+    }
+
+    #popupTarjetaExpandida {
+        width: 95vw;
+        max-width: 330px;
+        height: auto;
+        padding: 10px;
+    }
+
+    .popup-expandida-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .tarjeta-expandida-interna {
+        width: 300px;
+        height: 140px;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-esquerda {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-label {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-milhao {
+        font-size: 14px;
+    }
+
+    .tarjeta-expandida-interna .tarjeta-direita {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 130px;
+    }
+
+    #tituloExpandido {
+        font-size: 15px;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+
+    .popup-expandida-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .botao-salvar-expandida {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .botao-fechar-expandida {
+        font-size: 20px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: #FFFFFF;
+    }
+}
