@@ -133,11 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
     uploadForm.addEventListener('submit', e => {
         e.preventDefault();
 
-        // Instância do Supabase
-        const supabaseUrl = 'https://ehrsonmsjtnsfnznitsl.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocnNvbm1zanRuc2Zuem5pdHNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4MzkyMDEsImV4cCI6MjA2MjQxNTIwMX0.Wl9JJvUxPA5r-rgVKYoMsi2nhYGjumArB7N3RnOGSwA';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
         const milhao = milhaoInput.value.trim();
         const nomeGuerra = nomeGuerraInput.value.trim();
         const inputFotos = document.getElementById('foto');
