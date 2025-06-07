@@ -20,7 +20,6 @@ function showLetters(index = 0) {
         letters[index].classList.add("visible");
         setTimeout(() => showLetters(index + 1), 150);
     } else {
-
         phraseContainer.classList.add("blink");
         setTimeout(() => {
             preloader.style.display = "none";
@@ -37,7 +36,7 @@ setTimeout(() => {
 }, 1000);
 // Preloader Fim
 
-// Dropdown Menu Início
+// --- Início do Dropdown Menu, Upload e Galeria ---
 document.addEventListener('DOMContentLoaded', () => {
     const toggleIcon = document.querySelector('.menu-dropdown i');
     const dropdown = document.querySelector('.dropdown-menu');
@@ -62,10 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const botaoConfirmarExclusao = document.getElementById('confirmarExclusao');
     const botaoCancelarExclusao = document.getElementById('cancelarExclusao');
 
-    let fotos = [...document.querySelectorAll('.foto')];
+    // Fotos da galeria (inicialmente vazias, carregadas depois)
+    let fotos = [];
     let indice = 0;
     let fotoParaExcluir = null;
 
+    // Função para carregar fotos automaticamente (exemplo simples, pode adaptar para Supabase ou API)
+    function carregarFotosAutomaticamente() {
+        fotos = [...document.querySelectorAll('.foto')];
+        // Se desejar carregar via API, aqui insira sua chamada async e depois atualize fotos
+    }
+    carregarFotosAutomaticamente();
+
+    // Toggle do dropdown menu
     toggleIcon.addEventListener('click', () => {
         const isOpen = getComputedStyle(dropdown).display === 'block';
         if (!isOpen) {
@@ -79,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Fecha dropdown clicando fora
     document.addEventListener('click', (e) => {
         if (!dropdown.contains(e.target) && !toggleIcon.contains(e.target)) {
             dropdown.style.display = 'none';
@@ -87,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Botão para abrir popup de upload
     document.querySelectorAll('.botao-adicionar').forEach(botao => {
         botao.addEventListener('click', () => {
             if (uploadForm && popupUpload) {
@@ -102,16 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Função global para fechar popups
     window.closePopup = function () {
-        document.getElementById('popupUpload').style.display = 'none';
-        document.getElementById('popupErroMilhao').style.display = 'none';
+        popupUpload.style.display = 'none';
+        popupErroMilhao.style.display = 'none';
+        popupConfirmacao.style.display = 'none';
     };
 
+    // Previne scroll indesejado no campo Milhão
     milhaoInput.addEventListener('wheel', e => e.preventDefault());
     milhaoInput.addEventListener('keydown', e => {
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') e.preventDefault();
     });
 
+    // Valida Milhão ao pressionar Enter ou Tab
     milhaoInput.addEventListener('keydown', e => {
         const milhao = parseInt(milhaoInput.value, 10);
         if ((e.key === 'Enter' || e.key === 'Tab') &&
@@ -122,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Valida Milhão no blur (perda de foco)
     milhaoInput.addEventListener('blur', () => {
         const milhao = parseInt(milhaoInput.value, 10);
         if (isNaN(milhao) || milhao < 1001 || milhao > 1492 || milhaoInput.value.length !== 4) {
@@ -130,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Upload do formulário
     uploadForm.addEventListener('submit', e => {
         e.preventDefault();
 
@@ -179,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.galeria-grid').appendChild(divFoto);
 
                 fotos = [...document.querySelectorAll('.foto')];
-                atualizarEventosDasFotos();
+                // Delegação cuida dos eventos
             };
 
             reader.readAsDataURL(arquivo);
@@ -197,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fotoExpandida.classList.remove('active');
     });
 
+    // Navegação da foto expandida
     setaAnterior.addEventListener('click', () => {
         if (indice > 0) {
             updateFoto(indice - 1);
@@ -213,19 +230,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Confirmação da exclusão
     botaoConfirmarExclusao.addEventListener('click', () => {
-        const milhao = inputMilhaoConfirma.value.trim();
-        const guerra = inputGuerraConfirma.value.trim();
+        const milhaoConfirma = inputMilhaoConfirma.value.trim();
+        const nomeGuerraConfirma = inputGuerraConfirma.value.trim();
 
-        if (fotoParaExcluir &&
-            fotoParaExcluir.dataset.milhao === milhao &&
-            fotoParaExcluir.dataset.nomeGuerra === guerra) {
+        if (!fotoParaExcluir) {
+            alert("Erro: Nenhuma foto selecionada para exclusão.");
+            popupConfirmacao.style.display = 'none';
+            return;
+        }
+
+        if (milhaoConfirma === fotoParaExcluir.dataset.milhao &&
+            nomeGuerraConfirma.toLowerCase() === fotoParaExcluir.dataset.nomeGuerra.toLowerCase()) {
+            // Remove foto
             fotoParaExcluir.remove();
             fotos = [...document.querySelectorAll('.foto')];
-            fotoParaExcluir = null;
             popupConfirmacao.style.display = 'none';
+            fotoExpandida.classList.remove('active');
+            fotoParaExcluir = null;
         } else {
-            popupErroMilhao.style.display = 'flex';
+            alert("Milhão ou Nome de Guerra incorretos. Exclusão cancelada.");
         }
     });
 
@@ -234,42 +259,41 @@ document.addEventListener('DOMContentLoaded', () => {
         fotoParaExcluir = null;
     });
 
-    function updateFoto(i) {
-        const foto = fotos[i];
-        if (!foto) return;
-        const img = foto.querySelector('img');
-        imagemGrande.src = img.src;
-        tituloFoto.textContent = img.alt;
-        indiceFoto.textContent = i < 9 ? `0${i + 1}` : `${i + 1}`;
-        indice = i;
-    }
-
-    function atualizarEventosDasFotos() {
-        fotos.forEach(foto => {
-            foto.replaceWith(foto.cloneNode(true));
-        });
-
-        fotos = [...document.querySelectorAll('.foto')];
-
-        fotos.forEach((foto, i) => {
-            const botaoDelete = foto.querySelector('.botao-deletar');
-
-            if (botaoDelete) {
-                botaoDelete.onclick = (e) => {
-                    e.stopPropagation();
-                    fotoParaExcluir = foto;
-                    popupConfirmacao.style.display = 'flex';
-                    inputMilhaoConfirma.value = '';
-                    inputGuerraConfirma.value = '';
-                };
+    // Deleção via botão deletar na foto
+    document.querySelector('.galeria-grid').addEventListener('click', e => {
+        if (e.target.closest('.botao-deletar')) {
+            fotoParaExcluir = e.target.closest('.foto');
+            if (fotoParaExcluir) {
+                inputMilhaoConfirma.value = '';
+                inputGuerraConfirma.value = '';
+                popupConfirmacao.style.display = 'flex';
             }
+        }
+    });
 
-            foto.onclick = () => {
-                updateFoto(i);
-                fotoExpandida.classList.add('active');
-            };
-        });
+    // Atualiza foto expandida
+    function updateFoto(i) {
+        if (i < 0 || i >= fotos.length) return;
+        indice = i;
+        const foto = fotos[i];
+        const img = foto.querySelector('img');
+        if (!img) return;
+
+        imagemGrande.src = img.src;
+        tituloFoto.textContent = img.alt || "Sem título";
+        indiceFoto.textContent = `${i + 1} / ${fotos.length}`;
+        fotoExpandida.classList.add('active');
     }
 
-    atualizarEventosDasFotos();
+    // Clique na foto para expandir
+    document.querySelector('.galeria-grid').addEventListener('click', e => {
+        const target = e.target;
+        const fotoDiv = target.closest('.foto');
+        if (fotoDiv) {
+            const idx = fotos.indexOf(fotoDiv);
+            if (idx !== -1) {
+                updateFoto(idx);
+            }
+        }
+    });
 });
