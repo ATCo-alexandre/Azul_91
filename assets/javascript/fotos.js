@@ -72,8 +72,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar fotos automaticamente (exemplo simples, pode adaptar para Supabase ou API)
     function carregarFotosAutomaticamente() {
-        fotos = [...document.querySelectorAll('.foto')];
-        // Se desejar carregar via API, aqui insira sua chamada async e depois atualize fotos
+        async function carregarFotosAutomaticamente() {
+            console.log("Função carregarFotosAutomaticamente chamada");
+            try {
+                const { data, error } = await client.storage.from('fotos').list('', {
+                    limit: 100,
+                    offset: 0,
+                    sortBy: { column: 'created_at', order: 'asc' }
+                });
+
+                if (error) {
+                    console.error("Erro ao listar fotos do Supabase:", error.message);
+                    return;
+                }
+
+                const galeriaGrid = document.querySelector('.galeria-grid');
+                if (!galeriaGrid) {
+                    console.error("Elemento .galeria-grid não encontrado.");
+                    return;
+                }
+
+                galeriaGrid.innerHTML = ''; // limpa galeria antes de carregar
+
+                for (const item of data) {
+                    const { data: publicUrlData } = client.storage.from('fotos').getPublicUrl(item.name);
+                    const urlImagem = publicUrlData.publicUrl;
+
+                    // Extrai milhao e nome de guerra do nome do arquivo
+                    const partes = item.name.split('_');
+                    const milhao = partes[0] || '';
+                    const nomeGuerra = partes[1] || '';
+
+                    const novaImagem = document.createElement('img');
+                    novaImagem.src = urlImagem;
+                    novaImagem.alt = item.name;
+
+                    const divFoto = document.createElement('div');
+                    divFoto.className = 'foto';
+                    divFoto.dataset.milhao = milhao;
+                    divFoto.dataset.nomeGuerra = nomeGuerra;
+                    divFoto.dataset.nomeArquivo = item.name;
+
+                    const botaoDelete = document.createElement('button');
+                    botaoDelete.className = 'botao-deletar';
+                    botaoDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+                    divFoto.appendChild(novaImagem);
+                    divFoto.appendChild(botaoDelete);
+
+                    galeriaGrid.appendChild(divFoto);
+                }
+
+                fotos = [...document.querySelectorAll('.foto')]; // atualiza referência
+            } catch (e) {
+                console.error("Erro inesperado ao carregar fotos:", e);
+            }
+        }
     }
     carregarFotosAutomaticamente();
 
