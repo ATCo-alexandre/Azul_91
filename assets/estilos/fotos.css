@@ -48,7 +48,7 @@
 .phrase {
     display: flex;
     gap: 8px;
-    font-size: 2.8rem;
+    font-size: 4rem;
     opacity: 0;
     animation: fadeIn 0.5s forwards;
 }
@@ -960,8 +960,8 @@ body.menu-open .galeria-heading p {
 
 /* Responsividade Início */
 @media (max-width: 1024px) {
-    .smoke-text p {
-        font-size: 2.3rem;
+    .phrase {
+        font-size: 2.7rem;
     }
 
     .header {
@@ -1112,8 +1112,8 @@ body.menu-open .galeria-heading p {
 }
 
 @media (max-width: 576px) {
-    .smoke-text p {
-        font-size: 2.2rem;
+    .phrase {
+        font-size: 2rem;
     }
 
     .header {
@@ -1263,8 +1263,8 @@ body.menu-open .galeria-heading p {
 }
 
 @media (max-width: 430px) {
-    .smoke-text p {
-        font-size: 1.3rem;
+    .phrase {
+        font-size: 1.2rem;
     }
 
     .header {
@@ -1390,7 +1390,7 @@ body.menu-open .galeria-heading p {
 }
 
 @media (max-width: 360px) {
-    .smoke-text p {
+    .phrase {
         font-size: 1rem;
     }
 
@@ -1561,7 +1561,7 @@ body.menu-open .galeria-heading p {
 }
 
 @media (max-width: 320px) {
-    .smoke-text p {
+    .phrase {
         font-size: 1rem;
     }
 

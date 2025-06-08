@@ -1,3 +1,8 @@
+// === CONEXÃO COM SUPABASE ===
+const SUPABASE_URL = 'https://ehrsonmsjtnsfnznitsl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // chave completa aqui
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 // Preloader Início
 const phraseText = "Memórias em Fotos";
 const phraseContainer = document.getElementById("phrase");
@@ -23,7 +28,6 @@ function showLetters(index = 0) {
         phraseContainer.classList.add("blink");
         setTimeout(() => {
             preloader.style.display = "none";
-            mainContent.style.display = "block";
             document.body.style.overflow = "auto";
         }, 3000);
     }
@@ -174,31 +178,91 @@ document.addEventListener('DOMContentLoaded', () => {
             const arquivo = arquivos[i];
             if (!arquivo.type.startsWith('image/')) continue;
 
-            const reader = new FileReader();
+            // const reader = new FileReader();
 
-            reader.onload = function (event) {
-                const novaImagem = document.createElement('img');
-                novaImagem.src = event.target.result;
-                novaImagem.alt = arquivo.name.replace(/\.[^/.]+$/, "") || "Foto";
+            // reader.onload = function (event) {
+            //     const novaImagem = document.createElement('img');
+            //     novaImagem.src = event.target.result;
+            //     novaImagem.alt = arquivo.name.replace(/\.[^/.]+$/, "") || "Foto";
 
-                const divFoto = document.createElement('div');
-                divFoto.className = 'foto';
-                divFoto.dataset.milhao = milhao;
-                divFoto.dataset.nomeGuerra = nomeGuerra;
-                divFoto.appendChild(novaImagem);
+            //     const divFoto = document.createElement('div');
+            //     divFoto.className = 'foto';
+            //     divFoto.dataset.milhao = milhao;
+            //     divFoto.dataset.nomeGuerra = nomeGuerra;
+            //     divFoto.appendChild(novaImagem);
 
-                const botaoDelete = document.createElement('button');
-                botaoDelete.className = 'botao-deletar';
-                botaoDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
-                divFoto.appendChild(botaoDelete);
+            //     const botaoDelete = document.createElement('button');
+            //     botaoDelete.className = 'botao-deletar';
+            //     botaoDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            //     divFoto.appendChild(botaoDelete);
 
-                document.querySelector('.galeria-grid').appendChild(divFoto);
+            //     document.querySelector('.galeria-grid').appendChild(divFoto);
 
-                fotos = [...document.querySelectorAll('.foto')];
-                // Delegação cuida dos eventos
-            };
+            //     fotos = [...document.querySelectorAll('.foto')];
+            //     atualizarEventosDasFotos();
+            // };
 
-            reader.readAsDataURL(arquivo);
+            // reader.readAsDataURL(arquivo);
+
+            (async () => {
+                try {
+                    if (!arquivo || arquivo.size === 0) {
+                        alert("Arquivo inválido ou vazio.");
+                        return;
+                    }
+
+                    const extensao = arquivo.name.split('.').pop().toLowerCase();
+                    const nomeLimpo = arquivo.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_.-]/g, '');
+
+                    const nomeArquivo = `${milhao}_${nomeGuerra}_${Date.now()}_${nomeLimpo}`;
+
+                    // Faz o upload da imagem para o bucket 'fotos'
+                    const { data, error } = await client.storage
+                        .from('fotos')
+                        .upload(nomeArquivo, arquivo, {
+                            cacheControl: '3600',
+                            upsert: false
+                        });
+
+                    if (error) {
+                        alert("Erro ao enviar a imagem para o Supabase.");
+                        console.error(error);
+                        return;
+                    }
+
+                    // Recupera a URL pública da imagem
+                    const { data: publicUrlData } = client.storage
+                        .from('fotos')
+                        .getPublicUrl(nomeArquivo);
+
+                    const urlImagem = publicUrlData.publicUrl;
+
+                    // Cria os elementos HTML com a imagem e insere na galeria
+                    const novaImagem = document.createElement('img');
+                    novaImagem.src = urlImagem;
+                    novaImagem.alt = arquivo.name.replace(/\.[^/.]+$/, "") || "Foto";
+
+                    const divFoto = document.createElement('div');
+                    divFoto.className = 'foto';
+                    divFoto.dataset.milhao = milhao;
+                    divFoto.dataset.nomeGuerra = nomeGuerra;
+                    divFoto.dataset.nomeArquivo = nomeArquivo; // usado depois para exclusão
+                    divFoto.appendChild(novaImagem);
+
+                    const botaoDelete = document.createElement('button');
+                    botaoDelete.className = 'botao-deletar';
+                    botaoDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                    divFoto.appendChild(botaoDelete);
+
+                    document.querySelector('.galeria-grid').appendChild(divFoto);
+                    fotos = [...document.querySelectorAll('.foto')];
+                    atualizarEventosDasFotos();
+
+                } catch (err) {
+                    alert("Erro inesperado ao processar a imagem.");
+                    console.error(err);
+                }
+            })();
         }
 
         closePopup();
