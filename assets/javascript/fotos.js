@@ -1,6 +1,6 @@
-// === CONEXÃO COM SUPABASE ===
+// Conexão com Supabase
 const SUPABASE_URL = 'https://ehrsonmsjtnsfnznitsl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // chave completa aqui
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocnNvbm1zanRuc2Zuem5pdHNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4MzkyMDEsImV4cCI6MjA2MjQxNTIwMX0.Wl9JJvUxPA5r-rgVKYoMsi2nhYGjumArB7N3RnOGSwA'; // chave completa aqui
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Preloader Início
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botaoConfirmarExclusao = document.getElementById('confirmarExclusao');
     const botaoCancelarExclusao = document.getElementById('cancelarExclusao');
 
-    // Fotos da galeria (inicialmente vazias, carregadas depois)
+    // Fotos da galeria
     let fotos = [];
     let indice = 0;
     let fotoParaExcluir = null;
@@ -178,32 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const arquivo = arquivos[i];
             if (!arquivo.type.startsWith('image/')) continue;
 
-            // const reader = new FileReader();
-
-            // reader.onload = function (event) {
-            //     const novaImagem = document.createElement('img');
-            //     novaImagem.src = event.target.result;
-            //     novaImagem.alt = arquivo.name.replace(/\.[^/.]+$/, "") || "Foto";
-
-            //     const divFoto = document.createElement('div');
-            //     divFoto.className = 'foto';
-            //     divFoto.dataset.milhao = milhao;
-            //     divFoto.dataset.nomeGuerra = nomeGuerra;
-            //     divFoto.appendChild(novaImagem);
-
-            //     const botaoDelete = document.createElement('button');
-            //     botaoDelete.className = 'botao-deletar';
-            //     botaoDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
-            //     divFoto.appendChild(botaoDelete);
-
-            //     document.querySelector('.galeria-grid').appendChild(divFoto);
-
-            //     fotos = [...document.querySelectorAll('.foto')];
-            //     atualizarEventosDasFotos();
-            // };
-
-            // reader.readAsDataURL(arquivo);
-
             (async () => {
                 try {
                     if (!arquivo || arquivo.size === 0) {
@@ -256,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     document.querySelector('.galeria-grid').appendChild(divFoto);
                     fotos = [...document.querySelectorAll('.foto')];
-                    atualizarEventosDasFotos();
 
                 } catch (err) {
                     alert("Erro inesperado ao processar a imagem.");
