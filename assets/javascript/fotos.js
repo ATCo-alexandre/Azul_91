@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar fotos automaticamente (exemplo simples, pode adaptar para Supabase ou API)
     function carregarFotosAutomaticamente() {
         async function carregarFotosAutomaticamente() {
-            console.log("Função carregarFotosAutomaticamente chamada");
             try {
                 const { data, error } = await client.storage.from('fotos').list('', {
                     limit: 100,
